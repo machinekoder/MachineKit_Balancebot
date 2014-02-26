@@ -1,0 +1,3 @@
+[submodule "adafruit_lsm303_for_rpi"]
+	path = adafruit_lsm303_for_rpi
+	url = https://bitbucket.org/shigeru_kawaguchi/adafruit_lsm303_for_rpi.git
