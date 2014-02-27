@@ -28,7 +28,7 @@ dt = 0.02
 x = 0
 y = 0
 z = 0
-while 1==1:
+while (1 == 1):
 	time.sleep(dt)
 	gyroRate = s.Get_CalOutX_Value()
 	#dxyz = s.Get_CalOut_Value()
