@@ -51,15 +51,17 @@ gyro.CalibrateX()
 h = hal.component(args.name)
 h.newpin("angle", hal.HAL_FLOAT, hal.HAL_OUT)
 h.newpin("rate", hal.HAL_FLOAT, hal.HAL_OUT)
-h.newpin("timestamp", hal.HAL_FLOAT, hal.HAL_OUT)
+h.newpin("dt", hal.HAL_FLOAT, hal.HAL_OUT)
 h.newpin("request", hal.HAL_BIT, hal.HAL_IN)
 h.newpin("acknowledge", hal.HAL_BIT, hal.HAL_OUT)
 h.ready()
 
 h['angle'] = 0.0
 h['rate'] = 0.0
-h['timestamp'] = time.time()
+h['dt'] = 0.0
 h['acknowledge'] = 0
+
+oldTimestamp = time.time()
 
 while(1):
     time.sleep(update_interval)
@@ -67,11 +69,14 @@ while(1):
     if ((h['request'] == 1) and (h['acknowledge'] == 0)):
         gyroRate = gyro.Get_CalOutX_Value()
         accelXyz = accel.readAccelerationsG()
-        timestamp = time.time()  # NOTE: take timestamp before or after???
+        newTimestamp = time.time()  # NOTE: take timestamp before or after???
+
         accAngle = math.degrees(math.atan2(accelXyz.x - accelXzero,
                                            accelXyz.z - accelZzero))
         h['angle'] = accAngle
         h['rate'] = gyroRate
+        h['dt'] = newTimestamp - oldTimestamp
+        oldTimestamp = newTimestamp
         h['acknowledge'] = 1
     elif ((h['request'] == 0) and (h['acknowledge'] == 1)):
         h['acknowledge'] = 0
