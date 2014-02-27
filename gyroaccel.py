@@ -56,22 +56,22 @@ h.newpin("request", hal.HAL_BIT, hal.HAL_IN)
 h.newpin("acknowledge", hal.HAL_BIT, hal.HAL_OUT)
 h.ready()
 
-hal['angle'] = 0.0
-hal['rate'] = 0.0
-hal['timestamp'] = time.time()
-hal['acknowledge'] = 0
+h['angle'] = 0.0
+h['rate'] = 0.0
+h['timestamp'] = time.time()
+h['acknowledge'] = 0
 
 while(1):
     time.sleep(update_interval)
 
-    if ((hal['request'] == 1) and (hal['acknowledge'] == 0)):
+    if ((h['request'] == 1) and (h['acknowledge'] == 0)):
         gyroRate = gyro.Get_CalOutX_Value()
         accelXyz = accel.readAccelerationsG()
         timestamp = time.time()  # NOTE: take timestamp before or after???
         accAngle = math.degrees(math.atan2(accelXyz.x - accelXzero,
                                            accelXyz.z - accelZzero))
-        hal['angle'] = accAngle
-        hal['rate'] = gyroRate
-        hal['acknowledge'] = 1
-    elif ((hal['request'] == 0) and (hal['acknowledge'] == 1)):
-        hal['acknowledge'] = 0
+        h['angle'] = accAngle
+        h['rate'] = gyroRate
+        h['acknowledge'] = 1
+    elif ((h['request'] == 0) and (h['acknowledge'] == 1)):
+        h['acknowledge'] = 0

@@ -1,4 +1,4 @@
 loadrt kalman
 loadrt threads name1=run-thread period1=100000
 
-waitusr halmeter
+loadusr -Wn gyroaccel ~/MachineKit_Balancebot/gyroaccel.py --name gyroaccel --bus_id 1 --interval 0.1
