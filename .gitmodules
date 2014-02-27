@@ -1,3 +1,9 @@
 [submodule "adafruit_lsm303_for_rpi"]
 	path = adafruit_lsm303_for_rpi
 	url = https://bitbucket.org/shigeru_kawaguchi/adafruit_lsm303_for_rpi.git
+[submodule "libraries/adafruit_lsm303_for_rpi"]
+	path = libraries/adafruit_lsm303_for_rpi
+	url = https://bitbucket.org/shigeru_kawaguchi/adafruit_lsm303_for_rpi.git
+[submodule "libraries/Gyro-L3GD20-Python"]
+	path = libraries/Gyro-L3GD20-Python
+	url = https://github.com/mpolaczyk/Gyro-L3GD20-Python
